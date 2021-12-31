@@ -4,6 +4,6 @@
 
 Awesome **Fireworks VFX** to celebrate Happy New Year 2022 created using Visual Graph System from [Unity Engine](https://unity.com/srp/High-Definition-Render-Pipeline) and using High Definition Render Pipeline(HDRP) project.
 
-<h2>Skybox Asset</h2>
+<h2>Asset</h2>
 
 * Night Skybox from [Unity Asset Store](https://assetstore.unity.com/)
