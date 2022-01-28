@@ -84,7 +84,7 @@ namespace UnityTemplateProjects
         InputAction verticalMovementAction;
         InputAction lookAction;
         InputAction boostFactorAction;
-        bool        mouseRightButtonPressed;
+        bool mouseRightButtonPressed;
 
         void Start()
         {
