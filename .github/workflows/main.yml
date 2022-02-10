@@ -1,10 +1,10 @@
-name: Build project
+name: Fireworks VFX
 
 on: [push, pull_request]
 
 jobs:
   buildForAllSupportedPlatforms:
-    name: Build for ${{ matrix.targetPlatform }}
+    name: Fireworks VFX ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -28,5 +28,5 @@ jobs:
           targetPlatform: ${{ matrix.targetPlatform }}
       - uses: actions/upload-artifact@v2
         with:
-          name: Build-${{ matrix.targetPlatform }}
+          name: Fireworks VFX-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
