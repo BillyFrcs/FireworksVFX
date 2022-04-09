@@ -1,34 +1,36 @@
-name: Fireworks VFX
+name: Fireworks VFX Test Project
 
 on: [push, pull_request]
 
 jobs:
-  buildForAllSupportedPlatforms:
-    name: Fireworks VFX ${{ matrix.targetPlatform }}
+  testAllModes:
+    name: Test in ${{ matrix.testMode }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        targetPlatform:
-          - StandaloneWindows64 # Build a Windows 64-bit standalone.
+        projectPath:
+          - .
+        testMode:
+          - playmode
+          - editmode
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
           lfs: true
       - uses: actions/cache@v2
         with:
-          path: Library
-          key: Library-${{ matrix.targetPlatform }}
-          restore-keys: Library-
-      - uses: game-ci/unity-builder@v2
+          path: ${{ matrix.projectPath }}/Library
+          key: Library-${{ matrix.projectPath }}
+          restore-keys: |
+            Library-
+      - uses: game-ci/unity-test-runner@v2
+        id: tests
         env:
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          targetPlatform: ${{ matrix.targetPlatform }}
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Fireworks VFX-${{ matrix.targetPlatform }}
-          path: build/${{ matrix.targetPlatform }}
+          projectPath: ${{ matrix.projectPath }}
+          testMode: ${{ matrix.testMode }}
+          artifactsPath: ${{ matrix.testMode }}-artifacts
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          checkName: ${{ matrix.testMode }} Test Results
